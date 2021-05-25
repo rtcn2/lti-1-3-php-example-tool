@@ -2,9 +2,12 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 require_once __DIR__ . '/../db/example_database.php';
 
-use \IMSGlobal\LTI;
+use Firebase\JWT\JWT;
+use Packback\Lti1p3;
 
-LTI\LTI_OIDC_Login::new(new Example_Database())
-    ->do_oidc_login_redirect(TOOL_HOST . "/game.php")
-    ->do_redirect();
+JWT::$leeway = 5;
+
+Packback\Lti1p3\LtiOidcLogin::new(new ExampleDatabase())
+    ->doOidcLoginRedirect(TOOL_HOST . "/index.php")
+    ->doRedirect();
 ?>
